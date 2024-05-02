@@ -1,0 +1,28 @@
+[profile.default]
+solc_version = '0.8.19'
+src = 'src'
+out = 'artifacts/foundry'
+libs = ["node_modules", "lib"]
+test = 'test'
+cache_path  = 'artifacts/forge-cache'
+fs_permissions = [{ access = "read", path = "./addresses/addresses.json"}]
+auto_detect_solc = true
+evm_version = 'paris' # lock to paris to prevent use of push0 opcode which is not live on base
+optimizer_runs = 1
+rpc_storage_caching = { chains = "all", endpoints = "all" }
+
+[fuzz]
+runs = 1
+
+[rpc_endpoints]
+localhost = "http://127.0.0.1:8545"
+ethereum = "https://rpc.ankr.com/eth"
+optimism = "https://endpoints.omniatech.io/v1/op/mainnet/public"
+optimismSepolia = "https://optimism-sepolia-archival.rpc.grove.city/v1/62582485981a020039584cdd"
+avalanche = "https://rpc.ankr.com/avalanche"
+base = "https://mainnet.base.org"
+baseSepolia = "https://sepolia.base.org"
+local = "http://127.0.0.1:8545"
+arbitrum = "https://arb1.arbitrum.io/rpc"
+arbitrumSepolia = "https://arbitrum-sepolia-archival.rpc.grove.city/v1/62582485981a020039584cdd"
+sepolia = "https://sepolia.rpc.grove.city/v1/62582485981a020039584cdd"

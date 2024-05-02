@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* We want to customize colors for dark and light mode here, using variables */
+
+@layer base {
+  :root {
+    --color-text: #333;
+    --color-background: #fff;
+    --color-primary: #0070f3;
+    --color-secondary: #ff0080;
+    --color-accent: #79ffe1;
+    --color-muted: #73737d;
+    --color-border: #eaeaea;
+    --color-error: #ff0080;
+    --color-success: #0070f3;
+    --color-warning: #f7b955;
+    --color-info: #2196f3;
+    --color-link: #0070f3;
+    --color-inverse: #ffffff;
+    --color-inverse-background: #000000;
+
+    
+    --text-color-primary: #fff;
+    --text-color-secondary: #aaa;
+
+    --border-color-box: #444;
+
+    --background-color-app: #000;
+    --background-color-box: 29 27 28;
+    --background-color-inner: #333;
+
+    --background-color-inverted: 255 255 255;
+  }
+}

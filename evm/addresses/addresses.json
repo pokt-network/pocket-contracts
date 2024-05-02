@@ -1,0 +1,338 @@
+[
+    {
+        "addr": "0xeeB40477E57800bF23564531541DBc49b46A44f8",
+        "chainId": 11155111,
+        "isContract": true,
+        "name": "GOV_MULTISIG"
+    },
+    {
+        "addr": "0xeeB40477E57800bF23564531541DBc49b46A44f8",
+        "chainId": 84532,
+        "isContract": true,
+        "name": "GOV_MULTISIG"
+    },
+    {
+        "addr": "0x3B18476B5F86275a8575c5cC790416f711f4E148",
+        "chainId": 11155420,
+        "isContract": true,
+        "name": "GOV_MULTISIG"
+    },
+    {
+        "addr": "0xE62a6A6a213d459607E533ced6D0DDE86922012a",
+        "chainId": 421614,
+        "isContract": true,
+        "name": "GOV_MULTISIG"
+    },
+    {
+        "addr": "0x50AcB08D20d91B08A443b762cE8Ab50ad00a0635",
+        "chainId": 11155111,
+        "isContract": true,
+        "name": "WPOKT"
+    },
+    {
+        "addr": "0xe8DC1C92A2f7A65b03C4827013713CEf44a1482e",
+        "chainId": 11155111,
+        "isContract": false,
+        "name": "DEPLOYER_EOA"
+    },
+    {
+        "addr": "0xe8DC1C92A2f7A65b03C4827013713CEf44a1482e",
+        "chainId": 84532,
+        "isContract": false,
+        "name": "DEPLOYER_EOA"
+    },
+    {
+        "addr": "0xe8DC1C92A2f7A65b03C4827013713CEf44a1482e",
+        "chainId": 421614,
+        "isContract": false,
+        "name": "DEPLOYER_EOA"
+    },
+    {
+        "addr": "0xe8DC1C92A2f7A65b03C4827013713CEf44a1482e",
+        "chainId": 11155420,
+        "isContract": false,
+        "name": "DEPLOYER_EOA"
+    },
+    {
+        "addr": "0x1072F4Ad227c993765e457Ab0f925fD745e0dd8B",
+        "chainId": 11155420,
+        "isContract": false,
+        "name": "DEPLOYER_EOA_STRICT"
+    },
+    {
+        "addr": "0x1072F4Ad227c993765e457Ab0f925fD745e0dd8B",
+        "chainId": 421614,
+        "isContract": false,
+        "name": "DEPLOYER_EOA_STRICT"
+    },
+    {
+        "addr": "0x1072F4Ad227c993765e457Ab0f925fD745e0dd8B",
+        "chainId": 11155111,
+        "isContract": false,
+        "name": "DEPLOYER_EOA_STRICT"
+    },
+    {
+        "addr": "0x1072F4Ad227c993765e457Ab0f925fD745e0dd8B",
+        "chainId": 84532,
+        "isContract": false,
+        "name": "DEPLOYER_EOA_STRICT"
+    },
+    {
+        "addr": "0x4ad12cF27b58445808d7ea7fcf603094c4AB0742",
+        "chainId": 11155111,
+        "isContract": true,
+        "name": "PROXY_ADMIN"
+    },
+    {
+        "addr": "0xAcbF0D3d20B9E4651DD861A41E3dD0C6Fd491860",
+        "chainId": 84532,
+        "isContract": true,
+        "name": "PROXY_ADMIN"
+    },
+    {
+        "addr": "0xC60692957728B2EBe600f56D24902B3caAf50f6F",
+        "chainId": 11155420,
+        "isContract": true,
+        "name": "PROXY_ADMIN"
+    },
+    {
+        "addr": "0xC60692957728B2EBe600f56D24902B3caAf50f6F",
+        "chainId": 421614,
+        "isContract": true,
+        "name": "PROXY_ADMIN"
+    },
+    {
+        "addr": "0x68db4EBc28f1EC9bf30485397DaeA7cc4E9E0996",
+        "chainId": 11155420,
+        "isContract": false,
+        "name": "PAUSE_GUARDIAN"
+    },
+    {
+        "addr": "0x68db4EBc28f1EC9bf30485397DaeA7cc4E9E0996",
+        "chainId": 84532,
+        "isContract": false,
+        "name": "PAUSE_GUARDIAN"
+    },
+    {
+        "addr": "0x68db4EBc28f1EC9bf30485397DaeA7cc4E9E0996",
+        "chainId": 421614,
+        "isContract": false,
+        "name": "PAUSE_GUARDIAN"
+    },
+    {
+        "addr": "0x68db4EBc28f1EC9bf30485397DaeA7cc4E9E0996",
+        "chainId": 11155111,
+        "isContract": false,
+        "name": "PAUSE_GUARDIAN"
+    },
+    {
+        "addr": "0x7B1bD7a6b4E61c2a123AC6BC2cbfC614437D0470",
+        "chainId": 11155111,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x7B1bD7a6b4E61c2a123AC6BC2cbfC614437D0470",
+        "chainId": 421614,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x93BAD53DDfB6132b0aC8E37f6029163E63372cEE",
+        "chainId": 84532,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x93BAD53DDfB6132b0aC8E37f6029163E63372cEE",
+        "chainId": 11155420,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x27428DD2d3DD32A4D7f7C497eAaa23130d894911",
+        "chainId": 1,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x27428DD2d3DD32A4D7f7C497eAaa23130d894911",
+        "chainId": 56,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x27428DD2d3DD32A4D7f7C497eAaa23130d894911",
+        "chainId": 137,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x27428DD2d3DD32A4D7f7C497eAaa23130d894911",
+        "chainId": 43114,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x27428DD2d3DD32A4D7f7C497eAaa23130d894911",
+        "chainId": 250,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x27428DD2d3DD32A4D7f7C497eAaa23130d894911",
+        "chainId": 686,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x27428DD2d3DD32A4D7f7C497eAaa23130d894911",
+        "chainId": 787,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x27428DD2d3DD32A4D7f7C497eAaa23130d894911",
+        "chainId": 8217,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x27428DD2d3DD32A4D7f7C497eAaa23130d894911",
+        "chainId": 42220,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x27428DD2d3DD32A4D7f7C497eAaa23130d894911",
+        "chainId": 1284,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x27428DD2d3DD32A4D7f7C497eAaa23130d894911",
+        "chainId": 42161,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x27428DD2d3DD32A4D7f7C497eAaa23130d894911",
+        "chainId": 10,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0x706f82e9bb5b0813501714ab5974216704980e31",
+        "chainId": 8453,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_RELAYER"
+    },
+    {
+        "addr": "0xA4e8d8A848b51F3464B3E55d3eD329E4C19631b9",
+        "chainId": 11155111,
+        "isContract": true,
+        "name": "xPOKT_LOCKBOX"
+    },
+    {
+        "addr": "0x48B02a246861Abb10166D383787689793b1A51a6",
+        "chainId": 11155111,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_ADAPTER_PROXY"
+    },
+    {
+        "addr": "0x3CD42a423D8A3d288361c61e228B601B145E1EB5",
+        "chainId": 11155111,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_ADAPTER_LOGIC"
+    },
+    {
+        "addr": "0xD8a9Ddcb0840Cd52C0552ec281E33B398caD9441",
+        "chainId": 11155111,
+        "isContract": true,
+        "name": "xPOKT_LOGIC"
+    },
+    {
+        "addr": "0xf751E222C75462342748Dd68b3463a14C1E23555",
+        "chainId": 11155111,
+        "isContract": true,
+        "name": "xPOKT_PROXY"
+    },
+    {
+        "addr": "0x48B02a246861Abb10166D383787689793b1A51a6",
+        "chainId": 84532,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_ADAPTER_PROXY"
+    },
+    {
+        "addr": "0x3CD42a423D8A3d288361c61e228B601B145E1EB5",
+        "chainId": 84532,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_ADAPTER_LOGIC"
+    },
+    {
+        "addr": "0xD8a9Ddcb0840Cd52C0552ec281E33B398caD9441",
+        "chainId": 84532,
+        "isContract": true,
+        "name": "xPOKT_LOGIC"
+    },
+    {
+        "addr": "0xf751E222C75462342748Dd68b3463a14C1E23555",
+        "chainId": 84532,
+        "isContract": true,
+        "name": "xPOKT_PROXY"
+    },
+    {
+        "addr": "0x0339F6e6dec5a13d8D60eb18a46a8AF4e5Ad12AD",
+        "chainId": 11155111,
+        "isContract": true,
+        "name": "WPOKT_ROUTER"
+    },
+    {
+        "addr": "0x48B02a246861Abb10166D383787689793b1A51a6",
+        "chainId": 11155420,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_ADAPTER_PROXY"
+    },
+    {
+        "addr": "0x3CD42a423D8A3d288361c61e228B601B145E1EB5",
+        "chainId": 11155420,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_ADAPTER_LOGIC"
+    },
+    {
+        "addr": "0xD8a9Ddcb0840Cd52C0552ec281E33B398caD9441",
+        "chainId": 11155420,
+        "isContract": true,
+        "name": "xPOKT_LOGIC"
+    },
+    {
+        "addr": "0xf751E222C75462342748Dd68b3463a14C1E23555",
+        "chainId": 11155420,
+        "isContract": true,
+        "name": "xPOKT_PROXY"
+    },
+    {
+        "addr": "0x48B02a246861Abb10166D383787689793b1A51a6",
+        "chainId": 421614,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_ADAPTER_PROXY"
+    },
+    {
+        "addr": "0x3CD42a423D8A3d288361c61e228B601B145E1EB5",
+        "chainId": 421614,
+        "isContract": true,
+        "name": "WORMHOLE_BRIDGE_ADAPTER_LOGIC"
+    },
+    {
+        "addr": "0xD8a9Ddcb0840Cd52C0552ec281E33B398caD9441",
+        "chainId": 421614,
+        "isContract": true,
+        "name": "xPOKT_LOGIC"
+    },
+    {
+        "addr": "0xf751E222C75462342748Dd68b3463a14C1E23555",
+        "chainId": 421614,
+        "isContract": true,
+        "name": "xPOKT_PROXY"
+    }
+]
