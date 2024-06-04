@@ -3,13 +3,13 @@
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
 [submodule "evm/lib/forge-std"]
 	path = evm/lib/forge-std
-	url = https://github.com/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
 [submodule "evm/lib/zelt"]
 	path = evm/lib/zelt
-	url = https://github.com/lib/zelt
+	url = https://github.com/solidity-labs-io/zelt
 [submodule "evm/lib/wormhole"]
 	path = evm/lib/wormhole
-	url = https://github.com/lib/wormhole
+	url = https://github.com/wormhole-foundation/wormhole
 [submodule "evm/lib/openzeppelin-contracts-upgradeable"]
 	path = evm/lib/openzeppelin-contracts-upgradeable
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable
