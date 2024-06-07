@@ -174,7 +174,7 @@ contract xPOKT is
     /// @notice unpauses this contract, only callable by owner
     /// allows the owner to unpause the contract when the guardian has paused
     function ownerUnpause() external onlyOwner whenPaused {
-        _unpause();
+        _resetPauseState();
     }
 
     /// @notice update the pause duration
