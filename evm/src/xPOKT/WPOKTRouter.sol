@@ -20,7 +20,7 @@ contract WPOKTRouter {
     /// @notice the xPOKT token
     xPOKT public immutable xpokt;
 
-    /// @notice standard POKT token
+    /// @notice standard WPOKT token
     ERC20 public immutable wpokt;
 
     /// @notice xPOKT lockbox to convert wpokt to xpokt
@@ -29,7 +29,7 @@ contract WPOKTRouter {
     /// @notice wormhole bridge adapter proxy
     WormholeBridgeAdapter public wormholeBridge;
 
-    /// @notice event emitted when POKT is bridged to xPOKT
+    /// @notice event emitted when WPOKT is bridged to xPOKT
     event BridgeOutSuccess(uint16 chainId, address indexed to, uint256 amount);
 
     /// @notice initialize the xPOKT router
@@ -79,8 +79,8 @@ contract WPOKTRouter {
         uint256 bridgeCostFee = wormholeBridge.bridgeCost(chainId);
 
         require(
-            bridgeCostFee <= msg.value,
-            "WPOKTRouter: insufficient fee sent"
+            bridgeCostFee == msg.value,
+            "WPOKTRouter: cost not equal to quote"
         );
 
         /// transfer WPOKT to this contract from the sender
@@ -100,14 +100,6 @@ contract WPOKTRouter {
 
         /// bridge the xPOKT to the destination chain
         wormholeBridge.bridge{value: bridgeCostFee}(chainId, xpoktAmount, to);
-
-        /// refund any excess fee sent
-        if (address(this).balance != 0) {
-            (bool success, ) = msg.sender.call{value: address(this).balance}(
-                ""
-            );
-            require(success, "WPOKTRouter: failed to refund excess fee");
-        }
 
         emit BridgeOutSuccess(chainId, to, amount);
     }
