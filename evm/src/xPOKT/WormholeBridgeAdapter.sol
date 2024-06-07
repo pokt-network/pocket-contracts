@@ -212,7 +212,9 @@ contract WormholeBridgeAdapter is
             abi.encode(to, amount),
             /// no receiver value allowed, only message passing
             0,
-            gasLimit
+            gasLimit,
+            targetChainId,
+            to
         );
 
         emit TokensSent(targetChainId, to, amount);
