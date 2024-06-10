@@ -181,6 +181,11 @@ contract WormholeBridgeAdapterUnitTest is BaseTest {
         wormholeBridgeAdapterProxy.setGasLimit(1);
     }
 
+    function testSetCustomGasLimitNonOwnerFails() public {
+        vm.expectRevert("Ownable: caller is not the owner");
+        wormholeBridgeAdapterProxy.setCustomGasLimit(1, 1);
+    }
+
     function testRemoveTrustedSendersNonOwnerFails() public {
         vm.expectRevert("Ownable: caller is not the owner");
         wormholeBridgeAdapterProxy.removeTrustedSenders(
@@ -220,6 +225,27 @@ contract WormholeBridgeAdapterUnitTest is BaseTest {
 
         assertEq(
             wormholeBridgeAdapterProxy.gasLimit(),
+            newGasLimit,
+            "incorrect new gas limit"
+        );
+    }
+
+    function testSetCustomGasLimitOwnerSucceeds(uint16 chainId, uint96 newGasLimit) public {
+        uint96 defaultGasLimit = wormholeBridgeAdapterProxy.gasLimit();
+        uint96 oldGasLimit = wormholeBridgeAdapterProxy.chainGasLimit(chainId);
+
+        assertEq(
+            defaultGasLimit,
+            oldGasLimit,
+            "gas limits should be equal before custom gas limit set"
+        );
+
+        vm.prank(owner);
+
+        wormholeBridgeAdapterProxy.setCustomGasLimit(chainId, newGasLimit);
+
+        assertEq(
+            wormholeBridgeAdapterProxy.chainGasLimit(chainId),
             newGasLimit,
             "incorrect new gas limit"
         );
