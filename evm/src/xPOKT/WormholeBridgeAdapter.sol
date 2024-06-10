@@ -44,6 +44,9 @@ contract WormholeBridgeAdapter is
     /// starts off mapped to itself, but can be changed by governance
     mapping(uint16 => address) public targetAddress;
 
+    /// @notice chain-specific gas limit for wormhole relayer, changeable incase gas prices change on external network
+    mapping(uint16 => uint96) public customGasLimits;
+
     /// ---------------------------------------------------------
     /// ---------------------------------------------------------
     /// ------------------------ EVENTS -------------------------
@@ -51,20 +54,20 @@ contract WormholeBridgeAdapter is
     /// ---------------------------------------------------------
 
     /// @notice chain id of the target chain to address for bridging
-    /// @param dstChainId source chain id tokens were bridged from
+    /// @param targetChainId source chain id tokens were bridged from
     /// @param tokenReceiver address to receive tokens on destination chain
     /// @param amount of tokens bridged in
     event TokensSent(
-        uint16 indexed dstChainId,
+        uint16 indexed targetChainId,
         address indexed tokenReceiver,
         uint256 amount
     );
 
     /// @notice chain id of the target chain to address for bridging
-    /// @param dstChainId destination chain id to send tokens to
+    /// @param targetChainId destination chain id to send tokens to
     /// @param target address to send tokens to
     event TargetAddressUpdated(
-        uint16 indexed dstChainId,
+        uint16 indexed targetChainId,
         address indexed target
     );
 
@@ -123,6 +126,14 @@ contract WormholeBridgeAdapter is
         emit GasLimitUpdated(oldGasLimit, newGasLimit);
     }
 
+    /// @notice set a custom gas limit for the relayer on the external chain
+    /// should only be called if there is a change in gas prices on the specific external chain
+    /// @param chainId target chain id
+    /// @param newGasLimit new gas limit to set
+    function setCustomGasLimit(uint16 chainId, uint96 newGasLimit) external onlyOwner {
+        customGasLimits[chainId] = newGasLimit;
+    }
+
     /// @notice remove trusted senders from external chains
     /// @param _trustedSenders array of trusted senders to remove
     function removeTrustedSenders(
@@ -163,15 +174,29 @@ contract WormholeBridgeAdapter is
     /// --------------------------------------------------------
 
     /// @notice Estimate bridge cost to bridge out to a destination chain
-    /// @param dstChainId Destination chain id
+    /// @param targetChainId Destination chain id
     function bridgeCost(
-        uint16 dstChainId
+        uint16 targetChainId
     ) public view returns (uint256 gasCost) {
+        uint96 _gasLimit = chainGasLimit(targetChainId);
+
         (gasCost, ) = wormholeRelayer.quoteEVMDeliveryPrice(
-            dstChainId,
+            targetChainId,
             0,
-            gasLimit
+            _gasLimit
         );
+    }
+
+    /// @notice Returns gas limit for the relayer on the external chain
+    /// @param targetChainId Destination chain id
+    function chainGasLimit(
+        uint16 targetChainId
+    ) public view returns (uint96) {
+        if (customGasLimits[targetChainId] != 0) {
+            return customGasLimits[targetChainId];
+        }
+
+        return gasLimit;
     }
 
     /// --------------------------------------------------------
@@ -195,6 +220,7 @@ contract WormholeBridgeAdapter is
         address to
     ) internal override {
         uint16 targetChainId = targetChain.toUint16();
+        uint96 _gasLimit = chainGasLimit(targetChainId);
         uint256 cost = bridgeCost(targetChainId);
         require(msg.value == cost, "WormholeBridge: cost not equal to quote");
         require(
@@ -212,7 +238,7 @@ contract WormholeBridgeAdapter is
             abi.encode(to, amount),
             /// no receiver value allowed, only message passing
             0,
-            gasLimit,
+            _gasLimit,
             targetChainId,
             to
         );
