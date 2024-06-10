@@ -21,7 +21,9 @@ contract MockWormholeReceiver {
         address,
         bytes memory,
         uint256 receiverValue,
-        uint256
+        uint256,
+        uint16,
+        address
     ) external payable returns (uint64 sequence) {
         require(receiverValue == 0, "something is wrong with unit tests");
         nonce++;
