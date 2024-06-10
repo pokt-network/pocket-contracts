@@ -4,6 +4,7 @@ import "@forge-std/Test.sol";
 
 import "@test/helper/BaseTest.t.sol";
 import {MockWormholeReceiver} from "@test/mock/MockWormholeReceiver.sol";
+import {WormholeBridgeAdapter} from "@protocol/xPOKT/WormholeBridgeAdapter.sol";
 
 import {Address} from "@utils/Address.sol";
 
@@ -145,21 +146,6 @@ contract WormholeBridgeAdapterUnitTest is BaseTest {
         );
     }
 
-    function testAllTrustedSendersTrusted() public view {
-        bytes32[] memory trustedSenders = wormholeBridgeAdapterProxy
-            .allTrustedSenders(chainId);
-
-        for (uint256 i = 0; i < trustedSenders.length; i++) {
-            assertTrue(
-                wormholeBridgeAdapterProxy.isTrustedSender(
-                    chainId,
-                    trustedSenders[i]
-                ),
-                "trusted sender not trusted"
-            );
-        }
-    }
-
     function testInitializingFails() public {
         vm.expectRevert("Initializable: contract is already initialized");
 
@@ -186,24 +172,10 @@ contract WormholeBridgeAdapterUnitTest is BaseTest {
         wormholeBridgeAdapterProxy.setCustomGasLimit(1, 1);
     }
 
-    function testRemoveTrustedSendersNonOwnerFails() public {
-        vm.expectRevert("Ownable: caller is not the owner");
-        wormholeBridgeAdapterProxy.removeTrustedSenders(
-            new WormholeTrustedSender.TrustedSender[](0)
-        );
-    }
-
-    function testAddTrustedSendersNonOwnerFails() public {
-        vm.expectRevert("Ownable: caller is not the owner");
-        wormholeBridgeAdapterProxy.addTrustedSenders(
-            new WormholeTrustedSender.TrustedSender[](0)
-        );
-    }
-
     function testSetTargetAddressesNonOwnerFails() public {
         vm.expectRevert("Ownable: caller is not the owner");
         wormholeBridgeAdapterProxy.setTargetAddresses(
-            new WormholeTrustedSender.TrustedSender[](0)
+            new WormholeBridgeAdapter.TrustedSender[](0)
         );
     }
 
@@ -251,80 +223,12 @@ contract WormholeBridgeAdapterUnitTest is BaseTest {
         );
     }
 
-    function testRemoveTrustedSendersOwnerSucceeds() public {
-        testAddTrustedSendersOwnerSucceeds(address(this));
-
-        WormholeTrustedSender.TrustedSender[]
-            memory sender = new WormholeTrustedSender.TrustedSender[](1);
-
-        sender[0].addr = address(this);
-        sender[0].chainId = chainId;
-
-        vm.prank(owner);
-
-        wormholeBridgeAdapterProxy.removeTrustedSenders(sender);
-
-        assertFalse(
-            wormholeBridgeAdapterProxy.isTrustedSender(chainId, address(this)),
-            "trusted sender not un-set"
-        );
-    }
-
-    function testRemoveNonTrustedSendersOwnerFails() public {
-        testRemoveTrustedSendersOwnerSucceeds();
-
-        WormholeTrustedSender.TrustedSender[]
-            memory sender = new WormholeTrustedSender.TrustedSender[](1);
-
-        sender[0].addr = address(this);
-        sender[0].chainId = chainId;
-
-        vm.prank(owner);
-        vm.expectRevert("WormholeTrustedSender: not in list");
-        wormholeBridgeAdapterProxy.removeTrustedSenders(sender);
-    }
-
-    function testAddTrustedSendersOwnerSucceeds(address trustedSender) public {
-        vm.assume(trustedSender != address(wormholeBridgeAdapterProxy));
-        WormholeTrustedSender.TrustedSender[]
-            memory sender = new WormholeTrustedSender.TrustedSender[](1);
-
-        sender[0].addr = trustedSender;
-        sender[0].chainId = chainId;
-
-        vm.prank(owner);
-        wormholeBridgeAdapterProxy.addTrustedSenders(sender);
-
-        assertTrue(
-            wormholeBridgeAdapterProxy.isTrustedSender(chainId, trustedSender),
-            "trusted sender not set"
-        );
-    }
-
-    function testAddTrustedSendersOwnerFailsAlreadyWhitelisted(
-        address trustedSender
-    ) public {
-        if (trustedSender != address(wormholeBridgeAdapterProxy)) {
-            testAddTrustedSendersOwnerSucceeds(trustedSender);
-        }
-
-        WormholeTrustedSender.TrustedSender[]
-            memory sender = new WormholeTrustedSender.TrustedSender[](1);
-
-        sender[0].addr = trustedSender;
-        sender[0].chainId = chainId;
-
-        vm.prank(owner);
-        vm.expectRevert("WormholeTrustedSender: already in list");
-        wormholeBridgeAdapterProxy.addTrustedSenders(sender);
-    }
-
     function testSetTargetAddressesOwnerSucceeds(
         address addr,
         uint16 newChainId
     ) public {
-        WormholeTrustedSender.TrustedSender[]
-            memory sender = new WormholeTrustedSender.TrustedSender[](1);
+        WormholeBridgeAdapter.TrustedSender[]
+            memory sender = new WormholeBridgeAdapter.TrustedSender[](1);
 
         sender[0].addr = addr;
         sender[0].chainId = newChainId;

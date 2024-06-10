@@ -4,7 +4,6 @@ import {MultisigProposal} from "@proposals/MultisigProposal.sol";
 import {Proposal} from "@proposals/Proposal.sol";
 import {WormholeChainIds} from "@generated/WormholeChainIds.sol";
 import {WormholeBridgeAdapter} from "@protocol/xPOKT/WormholeBridgeAdapter.sol";
-import {WormholeTrustedSender} from "@protocol/governance/WormholeTrustedSender.sol";
 
 // MULTISIG_01 proposal deploys a Vault contract and an ERC20 token contract
 // Then the proposal transfers ownership of both Vault and ERC20 to the multisig address
@@ -39,15 +38,15 @@ contract WhitelistArbitrumAndOptimism is MultisigProposal, WormholeChainIds {
             "WORMHOLE_BRIDGE_ADAPTER_PROXY"
         );
 
-        WormholeTrustedSender.TrustedSender[]
-            memory trustedSenders = new WormholeTrustedSender.TrustedSender[](
+        WormholeBridgeAdapter.TrustedSender[]
+            memory trustedSenders = new WormholeBridgeAdapter.TrustedSender[](
                 2
             );
-        trustedSenders[0] = WormholeTrustedSender.TrustedSender({
+        trustedSenders[0] = WormholeBridgeAdapter.TrustedSender({
             chainId: arbitrumSepoliaWormholeChainId,
             addr: wormholeBridge
         });
-        trustedSenders[1] = WormholeTrustedSender.TrustedSender({
+        trustedSenders[1] = WormholeBridgeAdapter.TrustedSender({
             chainId: optimismSepoliaWormholeChainId,
             addr: wormholeBridge
         });
@@ -55,7 +54,7 @@ contract WhitelistArbitrumAndOptimism is MultisigProposal, WormholeChainIds {
         WormholeBridgeAdapter(wormholeBridge).setTargetAddresses(
             trustedSenders
         );
-        WormholeBridgeAdapter(wormholeBridge).addTrustedSenders(trustedSenders);
+        // WormholeBridgeAdapter(wormholeBridge).addTrustedSenders(trustedSenders);
     }
 
     /// @notice Executes the proposal actions.
@@ -76,15 +75,15 @@ contract WhitelistArbitrumAndOptimism is MultisigProposal, WormholeChainIds {
             "WORMHOLE_BRIDGE_ADAPTER_PROXY"
         );
 
-        WormholeTrustedSender.TrustedSender[]
-            memory trustedSenders = new WormholeTrustedSender.TrustedSender[](
+        WormholeBridgeAdapter.TrustedSender[]
+            memory trustedSenders = new WormholeBridgeAdapter.TrustedSender[](
                 2
             );
-        trustedSenders[0] = WormholeTrustedSender.TrustedSender({
+        trustedSenders[0] = WormholeBridgeAdapter.TrustedSender({
             chainId: arbitrumSepoliaWormholeChainId,
             addr: wormholeBridge
         });
-        trustedSenders[1] = WormholeTrustedSender.TrustedSender({
+        trustedSenders[1] = WormholeBridgeAdapter.TrustedSender({
             chainId: optimismSepoliaWormholeChainId,
             addr: wormholeBridge
         });

@@ -5,13 +5,11 @@ import {SafeCast} from "@openzeppelin-contracts/contracts/utils/math/SafeCast.so
 
 import {IWormholeRelayer} from "@protocol/wormhole/IWormholeRelayer.sol";
 import {IWormholeReceiver} from "@protocol/wormhole/IWormholeReceiver.sol";
-import {WormholeTrustedSender} from "@protocol/governance/WormholeTrustedSender.sol";
 
 /// @notice Wormhole xERC20 Token Bridge adapter
 contract WormholeBridgeAdapter is
     IWormholeReceiver,
-    xERC20BridgeAdapter,
-    WormholeTrustedSender
+    xERC20BridgeAdapter
 {
     using SafeCast for uint256;
 
@@ -46,6 +44,13 @@ contract WormholeBridgeAdapter is
 
     /// @notice chain-specific gas limit for wormhole relayer, changeable incase gas prices change on external network
     mapping(uint16 => uint96) public customGasLimits;
+
+
+    struct TrustedSender {
+        uint16 chainId;
+        address addr;
+    }
+
 
     /// ---------------------------------------------------------
     /// ---------------------------------------------------------
@@ -103,7 +108,6 @@ contract WormholeBridgeAdapter is
         /// @dev the external chain contracts MUST HAVE THE SAME ADDRESS on the external chain
         for (uint256 i = 0; i < targetChains.length; i++) {
             targetAddress[targetChains[i]] = address(this);
-            _addTrustedSender(address(this), targetChains[i]);
         }
 
         /// @dev default starting gas limit for relayer
@@ -134,28 +138,12 @@ contract WormholeBridgeAdapter is
         customGasLimits[chainId] = newGasLimit;
     }
 
-    /// @notice remove trusted senders from external chains
-    /// @param _trustedSenders array of trusted senders to remove
-    function removeTrustedSenders(
-        WormholeTrustedSender.TrustedSender[] memory _trustedSenders
-    ) external onlyOwner {
-        _removeTrustedSenders(_trustedSenders);
-    }
-
-    /// @notice add trusted senders from external chains
-    /// @param _trustedSenders array of trusted senders to add
-    function addTrustedSenders(
-        WormholeTrustedSender.TrustedSender[] memory _trustedSenders
-    ) external onlyOwner {
-        _addTrustedSenders(_trustedSenders);
-    }
-
     /// @notice add map of target addresses for external chains
     /// @dev there is no check here to ensure there isn't an existing configuration
     /// ensure the proper add or remove is being called when using this function
     /// @param _chainConfig array of chainids to addresses to add
     function setTargetAddresses(
-        WormholeTrustedSender.TrustedSender[] memory _chainConfig
+        TrustedSender[] memory _chainConfig
     ) external onlyOwner {
         for (uint256 i = 0; i < _chainConfig.length; i++) {
             targetAddress[_chainConfig[i].chainId] = _chainConfig[i].addr;
@@ -223,6 +211,7 @@ contract WormholeBridgeAdapter is
         uint96 _gasLimit = chainGasLimit(targetChainId);
         uint256 cost = bridgeCost(targetChainId);
         require(msg.value == cost, "WormholeBridge: cost not equal to quote");
+        
         require(
             targetAddress[targetChainId] != address(0),
             "WormholeBridge: invalid target chain"
@@ -264,10 +253,12 @@ contract WormholeBridgeAdapter is
             msg.sender == address(wormholeRelayer),
             "WormholeBridge: only relayer allowed"
         );
+
         require(
             isTrustedSender(sourceChain, senderAddress),
             "WormholeBridge: sender not trusted"
         );
+
         require(
             !processedNonces[nonce],
             "WormholeBridge: message already processed"
@@ -280,5 +271,36 @@ contract WormholeBridgeAdapter is
 
         /// mint tokens and emit events
         _bridgeIn(sourceChain, to, amount);
+    }
+
+
+    /// @notice returns whether or not the address is in the trusted senders list for a given chain
+    /// @param chainId The wormhole chain id to check
+    /// @param addr The address to check
+    function isTrustedSender(
+        uint16 chainId,
+        bytes32 addr
+    ) public view returns (bool) {
+        return addressToBytes(targetAddress[chainId]) == addr;
+    }
+
+    /// @notice returns whether or not the address is in the trusted senders list for a given chain
+    /// @param chainId The wormhole chain id to check
+    /// @param addr The address to check
+    function isTrustedSender(
+        uint16 chainId,
+        address addr
+    ) public view returns (bool) {
+        return targetAddress[chainId] == addr;
+    }
+
+    /// @notice Wormhole addresses are denominated in 32 byte chunks. Converting the address to a bytes20
+    /// then to a bytes32 *left* aligns it, so we right shift to get the proper data
+    /// @param addr The address to convert
+    /// @return The address as a bytes32
+    function addressToBytes(
+        address addr
+    ) public pure returns (bytes32) {
+        return bytes32(bytes20(addr)) >> 96;
     }
 }

@@ -12,7 +12,6 @@ import {MintLimits} from "@protocol/xPOKT/MintLimits.sol";
 import {xPOKTDeploy} from "@deployments/xPOKTDeploy.sol";
 import {XERC20Lockbox} from "@protocol/xPOKT/XERC20Lockbox.sol";
 import {WormholeBridgeAdapter} from "@protocol/xPOKT/WormholeBridgeAdapter.sol";
-import {WormholeTrustedSender} from "@protocol/governance/WormholeTrustedSender.sol";
 import {ProxyAdmin} from "@openzeppelin-contracts/contracts/proxy/transparent/ProxyAdmin.sol";
 
 import {SigUtils} from "@test/helper/SigUtils.sol";
