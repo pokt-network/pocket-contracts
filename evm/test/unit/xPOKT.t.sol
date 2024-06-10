@@ -794,7 +794,7 @@ contract xPOKTUnitTest is BaseTest {
         assertTrue(xpoktProxy.paused());
 
         xpoktProxy.ownerUnpause();
-        assertTrue(xpoktProxy.paused(), "contract not unpaused");
+        assertFalse(xpoktProxy.paused(), "contract is unpaused");
     }
 
     function testOwnerUnpauseFailsNotPaused() public {

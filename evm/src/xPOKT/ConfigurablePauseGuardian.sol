@@ -42,7 +42,7 @@ contract ConfigurablePauseGuardian is ConfigurablePause {
     /// 1). kicks the current guardian
     /// 2). sets pauseUsed to false
     /// 3). unpauses the contracts by setting pause time to 0
-    function _resetPauseState() private {
+    function _resetPauseState() internal {
         address previousPauseGuardian = pauseGuardian;
 
         /// remove the pause guardian
